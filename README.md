@@ -45,7 +45,7 @@ En comparación con un SPA tradicional (aplicación de una sola página), la ven
     ¿Qué quiere decir aplicaciones síncronas?🤔
     
     Si la aplicación comienza con un proceso de carga de datos a través de una petición Ajax, el crawler no esperará a que termine. Esto significa que si tiene contenido obtenido de manera asíncrona en páginas donde SEO es importante, es muy posible que se necesite SSR.
-Aunque Google es capaz de hacer scraping en las aplicaciones SPA (*mas info [aquí](https://goralewicz.com/blog/javascript-seo-experiment/)*).
+Aunque Google es capaz de hacer scraping en las aplicaciones SPA (*más info [aquí](https://goralewicz.com/blog/javascript-seo-experiment/)*).
 
     > “Times have changed. Today, as long as you're not blocking Googlebot from crawling your JavaScript or CSS files, [we are generally able to render and understand your web pages like modern browsers.](https://webmasters.googleblog.com/2014/05/understanding-web-pages-better.html) To reflect this improvement, we recently [updated our technical Webmaster Guidelines](https://webmasters.googleblog.com/2014/10/updating-our-technical-webmaster.html) to recommend against disallowing Googlebot from crawling your site's CSS or JS files.”
 
