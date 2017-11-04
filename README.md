@@ -63,9 +63,9 @@ También hay algunos inconvenientes que considerar al usar SSR:
 
 ## <a id="isomorfica-alternativas"></a>Alternativas
 
-Si quieres conseguir las ventajas sobre SEO que ofrece SSR pero sin todas las desventajas que éste ofrece, entonces probablemente quieras usar otra herramienta en su lugar, esta herramienta se llama *Prerendering*.
+Si quieres conseguir las ventajas sobre SEO que ofrece SSR pero sin todas las desventajas que éste ofrece, entonces probablemente quieras usar otra herramienta en su lugar, esta herramienta se llama ***Prerendering***.
 
-El *Prerender* en lugar de utilizar un servidor web para compilar HTML sobre la marcha, simplemente genera archivos HTML estáticos para rutas específicas en tiempo de compilación. La ventaja de usar *prerender* es que la configuración inicial es mucho más simple y nos permite mantener nuestro frontal como un sitio totalmente estático.
+El ***Prerender*** en lugar de utilizar un servidor web para compilar HTML sobre la marcha, simplemente genera archivos HTML estáticos para rutas específicas en tiempo de compilación. La ventaja de usar *prerender* es que la configuración inicial es mucho más simple y nos permite mantener nuestro frontal como un sitio totalmente estático.
  
 Si estás utilizando [**webpack**](https://webpack.github.io/), puedes agregar fácilmente *prerendering* con [prerender-spa-plugin](https://github.com/chrisvfritz/prerender-spa-plugin).
 
