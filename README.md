@@ -273,7 +273,7 @@ Podemos comenzar a instalar nuestro proyecto Nuxt desde un template ya creado, e
 
 ## <a id="guide-directorio"></a>Estructura del directorio
 
-El *scaffolding* del template de Nuxt nos genera un total de 8 carpetas más 1 archivo de configuración:
+El *scaffolding* del template de Nuxt nos genera un total de 8 carpetas más 1 archivo de configuración junto con el archivo *package.json*:
 ### Carpetas
 
 1. La carpeta de ***assets***
@@ -318,7 +318,7 @@ El *scaffolding* del template de Nuxt nos genera un total de 8 carpetas más 1 a
 
 	###### *Este directorio no puede ser renombrado.*
 
-### Archivo de configuración
+### Archivos de configuración
 
 1. El archivo ***nuxt.config.js***
 
