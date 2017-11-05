@@ -234,7 +234,99 @@ Nuxt.js puede configurarse de tres formas diferentes para generar aplicaciones:
 
 # <a id="guide"></a>Guía de inicio
 ## <a id="guide-instalacion"></a>Instalación
+Podemos comenzar a instalar nuestro proyecto Nuxt desde un template ya creado, este template ya nos dará todo el scaffolding básico necesario para crear nuestra aplicación. Tan sólo debemos de tener [vue-cli](https://github.com/vuejs/vue-cli) instalado en nuestra máquina.
+
+> Prerequisitos: Tener instalado Node.js y npm
+
+1. Instalamos vue-cli:
+
+	``` bash
+	$ npm install -g vue-cli
+	```
+
+2. Una vez instalado vue-cli comenzamos con la instalación del template predefinido:
+
+	``` bash
+	$ vue init nuxt-community/starter-template <nombre-proyecto>
+	```
+
+	Si queremos que nuestro proyecto ya tenga una librería de componentes acoplada en el template de Nuxt, como es el caso de **[Vuetify](https://vuetifyjs.com/)**, debemos hacer:
+
+	``` bash
+	$ vue init vuetifyjs/nuxt <nombre-proyecto>
+	```
+
+3. Una vez instalado el template, comenzamos a instalar las dependencias:
+
+	``` bash
+	$ cd <nombre-proyecto>
+	$ npm install
+	```
+
+4. Por último lanzamos el proyecto en modo desarrollo:
+
+	``` bash
+	$ npm run dev
+	```
+
+	La aplicación estará ejecutándose en [http://localhost:3000](http://localhost:3000)
+
 ## <a id="guide-directorio"></a>Estructura del directorio
+
+### La carpeta de assets
+
+La carpeta de assets contiene los archivos no compilados como Less, Sass o JavaScript.
+
+### La carpeta de componentes
+
+La carpeta de componentes contiene los componentes de Vue.js. Nuxt.js no sobrecarga el método *data* en estos componentes.
+
+### La carpeta de *layouts*
+
+La carpeta de *layouts* contiene todos los *layouts* de la aplicación.
+
+###### *Este directorio no puede ser renombrado.*
+
+### La carpeta de *middlewares*
+
+La carpeta de *middleware* contiene los middlewares de la aplicación. Un middleware nos permite definir funciones personalizadas que se pueden ejecutar antes de visualizar una página o un grupo de páginas (*layouts*).
+
+### La carpeta de páginas
+
+La carpeta de páginas contiene las vistas de aplicaciones y sus rutas. El framework lee todos los archivos .vue dentro de este directorio y crea el enrutador de la aplicación.
+
+###### *Este directorio no puede ser renombrado.*
+
+### La carpeta de *plugins*
+
+La carpeta de *plugins* contiene los complementos de Javascript que se desean ejecutar antes de crear una instancia de la aplicación raíz Vue.js.
+
+### La carpeta de estáticos
+
+La carpeta de estáticos contiene tus archivos estáticos. Cada archivo dentro de este directorio está mapeado a /.
+
+> Ejemplo: /static/robots.txt se asigna como /robots.txt
+
+###### *Este directorio no puede ser renombrado.*
+
+### La carpeta de los *stores*
+
+La carpeta de la *stores* contiene sus archivos de almacenes Vuex.
+
+###### *Este directorio no puede ser renombrado.*
+
+### El archivo nuxt.config.js
+
+El archivo nuxt.config.js contiene la configuración personalizada de Nuxt.js.
+
+###### *Este archivo no puede ser renombrado.*
+
+### El archivo package.json
+
+El archivo package.json contiene las dependencias y scripts de la aplicación.
+
+###### *Este archivo no puede ser renombrado.*
+
 ## <a id="guide-jerarquia"></a>Jerarquía de vistas
 ## <a id="guide-routing"></a>Routing
 ## <a id="guide-store"></a>Store
