@@ -386,6 +386,204 @@ validate | Función validadora usada para rutas dinámicas.
 middleware | Uso de un middleware para la página, este middleware se llamara antes de renderizar la página.
 
 ## <a id="guide-routing"></a>Routing
+
+Nuxt.js genera automáticamente la configuración de `vue-router` basándose en la estructura en árbol de los archivos del directorio `pages`.
+
+Existen 4 tipos de enrutamiento:
+
+### 1. Rutas básicas
+
+El árbol de archivos:
+```
+pages/
+--| user/
+-----| index.vue
+-----| one.vue
+--| index.vue
+```
+
+genera la siguiente configuración:
+
+```javascript
+router: {
+  routes: [
+    {
+      name: 'index',
+      path: '/',
+      component: 'pages/index.vue'
+    },
+    {
+      name: 'user',
+      path: '/user',
+      component: 'pages/user/index.vue'
+    },
+    {
+      name: 'user-one',
+      path: '/user/one',
+      component: 'pages/user/one.vue'
+    }
+  ]
+}
+```
+
+### 2. Rutas dinámicas
+
+Para definir una ruta dinámica con un parámetro, necesitamos definir un **archivo *.vue* o un directorio subrayado como prefijo**.
+
+El árbol de archivos:
+```
+pages/
+--| _slug/
+-----| comments.vue
+-----| index.vue
+--| users/
+-----| _id.vue
+--| index.vue
+```
+
+genera la siguiente configuración:
+	
+```javasacript
+router: {
+  routes: [
+    {
+      name: 'index',
+      path: '/',
+      component: 'pages/index.vue'
+    },
+    {
+      name: 'users-id',
+      path: '/users/:id?',
+      component: 'pages/users/_id.vue'
+    },
+    {
+      name: 'slug',
+      path: '/:slug',
+      component: 'pages/_slug/index.vue'
+    },
+    {
+      name: 'slug-comments',
+      path: '/:slug/comments',
+      component: 'pages/_slug/comments.vue'
+    }
+  ]
+}
+```
+	
+Como se puede ver, la ruta `users-id` tiene la variable `:id?`opcional, si queremos que sea obligatoria, debemos crear un archivo `index.vue`  en el directorio `users/_id`.
+
+##### Función validadora de parámetros
+Nuxt.js nos permite añadir un método de aprobación dentro de nuestro componente de ruta dinámica.
+
+### 3. Rutas anidadas
+
+Nuxt.js nos permite crear rutas anidadas usando las rutas hijas de `vue-router`.
+Para definir el componente padre de una ruta anidad, necesitamos crear un archivo `.vue` con el mismo nombre que el directorio que contenga las vistas hijas. 
+
+‼️**Importante** no olvidar incluir el componente `<nuxt-child/>` dentro del componente padre (archivo `.vue`)
+
+El árbol de archivos:
+```
+pages/
+--| users/
+-----| _id.vue
+-----| index.vue
+--| users.vue
+```
+
+genera la siguiente configuración:
+
+```javascript
+router: {
+  routes: [
+    {
+      path: '/users',
+      component: 'pages/users.vue',
+      children: [
+	{
+	  path: '',
+	  component: 'pages/users/index.vue',
+	  name: 'users'
+	},
+	{
+	  path: ':id',
+	  component: 'pages/users/_id.vue',
+	  name: 'users-id'
+	}
+      ]
+    }
+  ]
+}
+```
+
+### 4. Rutas anidadas dinámicas
+
+Este escenario no suele darse mucho, pero sería posible teniendo vistas hijas dinámicas dentro de vistas dinámicas padre.
+
+El árbol de archivos:
+```
+pages/
+--| _category/
+-----| _subCategory/
+--------| _id.vue
+--------| index.vue
+-----| _subCategory.vue
+-----| index.vue
+--| _category.vue
+--| index.vue
+```
+
+genera la siguiente configuración:
+
+```javascript
+router: {
+  routes: [
+    {
+      path: '/',
+      component: 'pages/index.vue',
+      name: 'index'
+    },
+    {
+      path: '/:category',
+      component: 'pages/_category.vue',
+      children: [
+	{
+	  path: '',
+	  component: 'pages/_category/index.vue',
+	  name: 'category'
+	},
+	{
+	  path: ':subCategory',
+	  component: 'pages/_category/_subCategory.vue',
+	  children: [
+	    {
+	      path: '',
+	      component: 'pages/_category/_subCategory/index.vue',
+	      name: 'category-subCategory'
+	    },
+	    {
+	      path: ':id',
+	      component: 'pages/_category/_subCategory/_id.vue',
+	      name: 'category-subCategory-id'
+	    }
+	  ]
+	}
+      ]
+    }
+  ]
+}
+```
+
+#### Transiciones
+
+Nuxt.js nos permite usar el componente `<transition>` para dejarnos crear diferentes animaciones de transición entre rutas.
+
+#### Middleware
+
+Los middlewares nos dejan definir funciones personalizadas que pueden ser ejecutadas antes de renderizar una página o un grupo de ellas.
+Cada middleware estará situado dentro del directorio `middleware/`, el nombre del archivos será el nombre del middleware.
+
+
 ## <a id="guide-store"></a>Store
 ## <a id="guide-plugin"></a>Plugins
 ## <a id="guide-assets"></a>Assets
