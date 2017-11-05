@@ -273,59 +273,64 @@ Podemos comenzar a instalar nuestro proyecto Nuxt desde un template ya creado, e
 
 ## <a id="guide-directorio"></a>Estructura del directorio
 
-### La carpeta de assets
+El *scaffolding* del template de Nuxt nos genera un total de 8 carpetas más 1 archivo de configuración:
+### Carpetas
 
-La carpeta de assets contiene los archivos no compilados como *Less, Sass o JavaScript*.
+1. La carpeta de ***assets***
 
-### La carpeta de componentes
+	La carpeta de assets contiene los archivos no compilados como *Less, Sass o JavaScript*.
 
-La carpeta de componentes contiene los componentes de Vue.js. Nuxt.js no sobrecarga el método *data* en estos componentes.
+2. La carpeta de **componentes**
 
-### La carpeta de *layouts*
+	La carpeta de componentes contiene los componentes de Vue.js. Nuxt.js no sobrecarga el método *data* en estos componentes.
 
-La carpeta de *layouts* contiene todos los *layouts* de la aplicación.
+3. La carpeta de ***layouts***
 
-###### *Este directorio no puede ser renombrado.*
+	La carpeta de *layouts* contiene todos los *layouts* de la aplicación.
 
-### La carpeta de *middlewares*
+	###### *Este directorio no puede ser renombrado.*
 
-La carpeta de *middleware* contiene los middlewares de la aplicación. Un middleware nos permite definir funciones personalizadas que se pueden ejecutar antes de visualizar una página o un grupo de páginas (*layouts*).
+4. La carpeta de ***middlewares***
 
-### La carpeta de páginas
+	La carpeta de *middleware* contiene los middlewares de la aplicación. Un middleware nos permite definir funciones personalizadas que se pueden ejecutar antes de visualizar una página o un grupo de páginas (*layouts*).
 
-La carpeta de páginas contiene las vistas de aplicaciones y sus rutas. El framework lee todos los archivos .vue dentro de este directorio y crea el enrutador de la aplicación.
+5. La carpeta de **páginas**
 
-###### *Este directorio no puede ser renombrado.*
+	La carpeta de páginas contiene las vistas de aplicaciones y sus rutas. El framework lee todos los archivos .vue dentro de este directorio y crea el enrutador de la aplicación.
 
-### La carpeta de *plugins*
+	###### *Este directorio no puede ser renombrado.*
 
-La carpeta de *plugins* contiene los complementos de Javascript que se desean ejecutar antes de crear una instancia de la aplicación raíz Vue.js.
+6. La carpeta de ***plugins***
 
-### La carpeta de estáticos
+	La carpeta de *plugins* contiene los complementos de Javascript que se desean ejecutar antes de crear una instancia de la aplicación raíz Vue.js.
 
-La carpeta de estáticos contiene tus archivos estáticos. Cada archivo dentro de este directorio está mapeado a /.
+7. La carpeta de **estáticos**
 
-> Ejemplo: /static/robots.txt se asigna como /robots.txt 🤖
+	La carpeta de estáticos contiene tus archivos estáticos. Cada archivo dentro de este directorio está mapeado a /.
 
-###### *Este directorio no puede ser renombrado.*
+	> Ejemplo: /static/robots.txt se asigna como /robots.txt 🤖
 
-### La carpeta de los *stores*
+	###### *Este directorio no puede ser renombrado.*
 
-La carpeta de la *stores* contiene sus archivos de almacenes Vuex 🏭.
+8. La carpeta de los ***stores***
 
-###### *Este directorio no puede ser renombrado.*
+	La carpeta de la *stores* contiene sus archivos de almacenes Vuex 🏭.
 
-### El archivo nuxt.config.js
+	###### *Este directorio no puede ser renombrado.*
 
-El archivo nuxt.config.js 🛠 contiene la configuración personalizada de Nuxt.js.
+### Archivo de configuración
 
-###### *Este archivo no puede ser renombrado.*
+1. El archivo ***nuxt.config.js***
 
-### El archivo package.json
+	El archivo nuxt.config.js 🛠 contiene la configuración personalizada de Nuxt.js.
 
-El archivo package.json contiene las dependencias y scripts de la aplicación.
+	###### *Este archivo no puede ser renombrado.*
 
-###### *Este archivo no puede ser renombrado.*
+2. El archivo ***package.json***
+
+	El archivo package.json contiene las dependencias y scripts de la aplicación.
+
+	###### *Este archivo no puede ser renombrado.*
 
 ## <a id="guide-jerarquia"></a>Jerarquía de vistas
 ## <a id="guide-routing"></a>Routing
