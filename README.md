@@ -210,7 +210,7 @@ Este esquema muestra que hace Nuxt.js cuando se llama al servidor o cuando el us
 1. Un usuario realiza una petición de una ruta determinada a servidor.
 2. El servidor ejecuta la acción nuxtServerInit  del store principal si la tiene implementada. Esta acción nos permite cargar datos iniciales (*prefetching* de datos globales).
 3. Se ejecutan todos aquellos middlewares que se encuentren en el fichero de configuración nuxt.config.js y los relacionados con el layout, la página raíz y las páginas hijas coincidentes que se hayan implementado.
-4. Si existe un validador, se ejecuta. Si se resuelve con un true se sigue el proceso, si no se devuelve un 404.
+4. Si existe un validador, se ejecuta. Si se resuelve con un true se sigue el proceso, si no se devuelve un 404 😭.
 5. Se obtienen aquellos datos de la página para que sean renderizados.
 6. Se renderiza en servidor y se sirve al usuario.
 7. Si el usuario navega por la aplicación hacia otra ruta, se repite el ciclo.
@@ -269,13 +269,13 @@ Podemos comenzar a instalar nuestro proyecto Nuxt desde un template ya creado, e
 	$ npm run dev
 	```
 
-	La aplicación estará ejecutándose en [http://localhost:3000](http://localhost:3000)
+	La aplicación estará ejecutándose 💻 en [http://localhost:3000](http://localhost:3000)
 
 ## <a id="guide-directorio"></a>Estructura del directorio
 
 ### La carpeta de assets
 
-La carpeta de assets contiene los archivos no compilados como Less, Sass o JavaScript.
+La carpeta de assets contiene los archivos no compilados como *Less, Sass o JavaScript*.
 
 ### La carpeta de componentes
 
@@ -305,19 +305,19 @@ La carpeta de *plugins* contiene los complementos de Javascript que se desean ej
 
 La carpeta de estáticos contiene tus archivos estáticos. Cada archivo dentro de este directorio está mapeado a /.
 
-> Ejemplo: /static/robots.txt se asigna como /robots.txt
+> Ejemplo: /static/robots.txt se asigna como /robots.txt 🤖
 
 ###### *Este directorio no puede ser renombrado.*
 
 ### La carpeta de los *stores*
 
-La carpeta de la *stores* contiene sus archivos de almacenes Vuex.
+La carpeta de la *stores* contiene sus archivos de almacenes Vuex 🏭.
 
 ###### *Este directorio no puede ser renombrado.*
 
 ### El archivo nuxt.config.js
 
-El archivo nuxt.config.js contiene la configuración personalizada de Nuxt.js.
+El archivo nuxt.config.js 🛠 contiene la configuración personalizada de Nuxt.js.
 
 ###### *Este archivo no puede ser renombrado.*
 
