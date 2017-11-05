@@ -749,4 +749,11 @@ Con esto crearemos la carpeta `dist` que tendrá todo listo para ser desplegado 
 
 
 # <a id="ejemplo"></a>Ejemplo
+
+Vamos a hacer un ejercicio de *live coding*
+
 # <a id="ejemplo-aws"></a>Ejemplo AWS Serverless
+
+Comentaremos como hemos hecho una aplicación con Nuxt.js basándonos en una arquitectura **Serverless de AWS**.
+
+Puede verse en el repositorio: [myImageProject](https://github.com/i62navpm/myImageProject)
