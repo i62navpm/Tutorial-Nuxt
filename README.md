@@ -333,6 +333,58 @@ El *scaffolding* del template de Nuxt nos genera un total de 8 carpetas más 1 a
 	###### *Este archivo no puede ser renombrado.*
 
 ## <a id="guide-jerarquia"></a>Jerarquía de vistas
+<p align="center"><img align="center" src="https://nuxtjs.org/nuxt-views-schema.png"/></p>
+
+En Nuxt.js existen tres niveles de jerarquía de vistas:
+- Document
+	- Layout
+		- Page
+
+### Document
+
+Existe sólo un único *Document* del que parten el resto de vistas, este es el archivo `.nuxt/views/app.template.html`.
+
+Podremos sobrecargar la funcionalidad de este documento añadiendo un archivo `app.html` situado en el directorio raíz del proyecto.
+
+### Layout
+
+Nuxt.js nos permite ampliar el *layout* principal o crear nuevos *layouts* personalizados insertándolos en la carpeta `layouts` de nuestro proyecto.
+
+¿Qué es un *layout*?🤔
+
+La layout o plantilla es un esquema de la distribución de los elementos dentro de una página web. Se compone de una serie de bloques de ciertas dimensiones en los que se colocará el contenido.
+
+1. **Layout por defecto**
+
+	Podemos ampliar la funcionalidad del *layout* principal agregando o modificando el archivo `layouts/default.vue`.
+
+	Debemos asegurarnos de incorporar el componente `<nuxt />` al crear un *layout* para mostrar el componente de la página.
+
+2. **Página de error**
+
+	Al igual que el *layout* por defecto tambien podemos personalizar la página de error añadiendo o modificando el archivo `layouts/error.vue`.
+
+3. **Nuevos *layouts***
+
+	Podemos incluir nuevas plantilas de elementos. Cada archivo añadido en el directorio de *layouts* creará un *layout* personalizado y accesible con la propiedad *layout* al resto de páginas.
+
+	Al igual que en el layout por defecto, no debemos olvidar el `<nuxt />` para mostrar las diferentes pginas que tengan asociado este nuevo layout.
+
+### Page
+
+Cada componente de tipo página es un componente de Vue en el que Nuxt.js añade funcionalidad especial para hacer el desarrollo de la aplicación universal lo más fácil posible
+
+ATRIBUTO	| DESCRIPCIÓN
+--------  | -----------
+asyncData	| El atributo más importante, puede ser una propiedad asíncrona y recibe el contexto de la aplicación como argumento. Se usa para conseguir datos y renderizarlos en servidor sin usar un *store*. Esta propiedad se llama cada vez, antes de cargar el componente.
+fetch	| Esta propiedad se usa para completar el *store* antes de renderizar la página.
+head | Sete Meta Tags específicos para la página actual.
+layout	| Especifica el *layout* al que corresponde la página.
+transition	| Nombre de la animación de transición que usa el componente de página.
+scrollToTop	| Booleano, para hacer scroll al inicio de la página antes de renderizarla.
+validate | Función validadora usada para rutas dinámicas.
+middleware | Uso de un middleware para la página, este middleware se llamara antes de renderizar la página.
+
 ## <a id="guide-routing"></a>Routing
 ## <a id="guide-store"></a>Store
 ## <a id="guide-plugin"></a>Plugins
