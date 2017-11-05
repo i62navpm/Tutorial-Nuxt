@@ -70,10 +70,168 @@ El ***Prerender*** en lugar de utilizar un servidor web para compilar HTML sobre
 Si estás utilizando [**webpack**](https://webpack.github.io/), puedes agregar fácilmente *prerendering* con [prerender-spa-plugin](https://github.com/chrisvfritz/prerender-spa-plugin).
 
 # <a id="que-nuxt"></a>¿Qué es Nuxt?
+
+> The 25th of October 2016, the team behind [zeit.co](https://zeit.co/), announced [Next.js](https://zeit.co/blog/next), a framework for server-rendered React applications. A few hours after the announcement, the idea of creating server-rendered Vue.js applications the same way as Next.js was obvious: **Nuxt.js** was born.
+
+
+📚 Nuxt.js es un *framework* que nos permite crear aplicaciones universales con [Vue.js](https://vuejs.org/). Nos permite crear componentes UI si tener que concentrarse en las distribuciones de cliente y servidor.
+
+Nuxt nos proporciona una capa de abstracción por encima de [Vue Server Renderer](https://ssr.vuejs.org/en/), haciéndonos más fácil y rápido el proceso de configuración y el desarrollo de aplicaciones isomórficas.
+
 ## <a id="que-nuxt-funciona"></a>¿Cómo funciona?
+<p align="center"><img align="center" src="https://i.imgur.com/avEUftE.png"/></p>
+
+Nuxt.js usa el siguiente stack tecnológico para la creación de aplicaciones:
+
+- **[Vue 2](https://vuejs.org/)**
+
+    Framework progresivo para la generación de SPA (*single page applications*).
+
+    ¿Qué quiere decir progresivo?🤔
+
+    Quiere decir que VUE está diseñado para ser adoptado incrementalmente, desde pequeñas aplicaciones simples hasta aplicaciones SPA más elaboradas.
+
+- **[Vue Router](https://router.vuejs.org/)**
+    
+    Nos da el servicio de *routing* para el cambio de vistas en la aplicación.
+- **[Vuex](https://vuex.vuejs.org/)**
+    
+    Gestión de estados centralizados de Vue.js
+- **[Vue Server Renderer](https://ssr.vuejs.org)**
+    
+    Librería que nos permite ejecutar código en servidor y cliente.
+- **[vue-meta](https://github.com/declandewet/vue-meta)**
+    
+    Librería que nos permite gestionar la meta información de la aplicación desde los componentes de Vue + SSR
+
+El peso total del framework es de 57kB min+gzip (53kB con Vuex).
+
+En el proceso de desarrollo Nuxt utiliza webpack con **vue-loader** y **babel-loader** para la generación de bundles.
+
 ## <a id="que-nuxt-caracteristicas"></a>Características
+
+- **Escritura de código en ficheros VUE** (*.vue)
+
+- **Separación automática de código** (*Code Splitting*)
+
+    ¿Qué quiere decir esto?
+
+    Es una característica muy potente que nos ofrece **webpack** que consiste en dividir el código en varios paquetes, que luego pueden cargarse bajo demanda o en paralelo.
+
+- **Renderizado en servidor**
+
+    Las vistas de la aplicación serán renderizadas en el servidor. Todos los cambios dinámicos son interceptados por Vue en cliente. Nuxt nos hace el SSR transparente.
+
+- **Sistema de routing con sincronismo de datos**
+
+    Nuxt configurará el routing de la aplicación dependiendo de la estructura de carpetas que hayamos creado, además nos proporciona herramientas para la carga síncrona de datos y vistas en servidor.
+
+- **Servicio de ficheros estáticos**
+
+    Ofrece capacidad de servir ficheros estáticos desde servidor.
+
+- **Transpilación de ES6/ES7**
+
+    Webpack junto con [Babel](https://babeljs.io) nos ofrece la posibilidad de transpilar el código escrito en un estándar moderno a código que el navegador pueda entender.
+
+    Todos conocemos las ventajas de ES6 pero cuáles son las novedades de ES7 (ES2016):
+	- Object Rest / Spread Properties
+
+        Object Rest
+        ```javascript
+        const {a, b, c, ...x} = {a: 1, b: 2, c: 3, x: 4, y: 5, z: 6};
+
+        console.log(a); // 1
+        console.log(b); // 2
+        console.log(c); // 3
+        console.log(x); // { x: 4, y: 5, z: 6 }
+        ```
+
+        Spread properties
+        ```javascript
+        const a = 1, b = 2, c = 3
+        const x = { x: 4, y: 5, z: 6 }
+        const obj = { a, b, c, ...x }
+
+        console.log(obj) //{a: 1, b: 2, c: 3, x: 4, y: 5, z: 6};
+        ```
+	- Observables
+	
+        Los observables son una nueva herramienta que nos permitirá adentrarnos en la programación reactiva, es decir, programar con flujos de datos (streams) asíncronos.
+        ```javascript
+        const resize = new Observable((o) => {
+          window.addEventListener("resize", () => {
+            let height = window.innerHeight
+            let width = window.innerWidth
+            o.next({ height, width })
+          })
+        })
+        ```
+
+	- Async Functions
+	
+        Nueva manera para resolver la asincronía en Javascript.
+        ```javascript
+        async function createEmployeeWorkflow() {
+          try {
+            let employee = await createEmployee()
+            await saveEmployee(employee)
+          } catch (err) {
+            throw new Error(err)
+          }
+        }
+        ```
+
+- **Bundling y minificación de JS & CSS**
+
+- **Pre-procesador: Sass, Less, Stylus, etc.**
+
+- **Manejo de los elementos de la etiqueta \<head> (<title>, \<meta>, etc.)**
+
+    Nos permite cambiar la meta información desde cualquier componente Vue
+
+- **Reemplazo de módulos de desarrollo en caliente**
+
+    Con esta opción sólo recargamos aquellos módulos donde hemos realizado cambios, evitando así cargar toda la página para mostrar los cambios de un único componente. Evitando así pérdida de tiempo en el desarrollo.
+- **HTTP/2 push headers ready**
+
+    Con esta funcionalidad, el servidor nos enviará los assets antes de que el navegador pregunte por ellos.
+
+- **Entesión de Nuxt con arquitecturas modulares**
+
+    Podemos extender la funcionalidad de Nuxt con arquitecturas modulares.
+
+
 ## <a id="que-nuxt-ciclo"></a>Ciclo de trabajo
+
+Este esquema muestra que hace Nuxt.js cuando se llama al servidor o cuando el usuario navega a través de la aplicación usando <nuxt-link>:
+<p align="center"><img align="center" src="https://nuxtjs.org/nuxt-schema.png"/></p>
+
+1. Un usuario realiza una petición de una ruta determinada a servidor.
+2. El servidor ejecuta la acción nuxtServerInit  del store principal si la tiene implementada. Esta acción nos permite cargar datos iniciales (*prefetching* de datos globales).
+3. Se ejecutan todos aquellos middlewares que se encuentren en el fichero de configuración nuxt.config.js y los relacionados con el layout, la página raíz y las páginas hijas coincidentes que se hayan implementado.
+4. Si existe un validador, se ejecuta. Si se resuelve con un true se sigue el proceso, si no se devuelve un 404.
+5. Se obtienen aquellos datos de la página para que sean renderizados.
+6. Se renderiza en servidor y se sirve al usuario.
+7. Si el usuario navega por la aplicación hacia otra ruta, se repite el ciclo.
+
+    > *Info sacada del blog ["El abismo de null"](https://elabismodenull.wordpress.com/2017/07/25/vuejs-aplicaciones-universales-con-nuxt/)*
+
 ## <a id="que-nuxt-renderizado"></a>Tipos de renderizado
+
+Nuxt.js puede configurarse de tres formas diferentes para generar aplicaciones:
+- **Server Rendered** (*Universal SSR*)
+
+    Podemos usar Nuxt.js como framework para manejar todo el renderizado UI de nuestro proyecto.
+
+- **Single Page Applications** (*SPA*)
+
+    Si por alguna razón no necesitamos el renderizado en servidor, podemos habilitar la opción de SPA y usar Nuxt como si trabajáramos con Vue.
+
+- **Static Generated** (*Pre Rendering*)
+	
+    Una de las grandes innovaciones de Nuxt es esta funcionalidad, lo que nos permite generar los estáticos de nuestro proyecto y poder alojarlos en algún CDN (*content delivery network*) con toda la mejora de SEO que nos proporciona Nuxt.
+
 # <a id="guide"></a>Guía de inicio
 ## <a id="guide-instalacion"></a>Instalación
 ## <a id="guide-directorio"></a>Estructura del directorio
