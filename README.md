@@ -583,10 +583,170 @@ Nuxt.js nos permite usar el componente `<transition>` para dejarnos crear difere
 Los middlewares nos dejan definir funciones personalizadas que pueden ser ejecutadas antes de renderizar una página o un grupo de ellas.
 Cada middleware estará situado dentro del directorio `middleware/`, el nombre del archivos será el nombre del middleware.
 
-
 ## <a id="guide-store"></a>Store
+
+Para el manejo de estados usaremos Vuex, Nuxt.js implementa Vuex en su core.
+
+### Activar Store
+
+Para activar Vuex simplemente debe de existir la carpeta `store`dentro del directorio del proyecto, si no existe esta carpeta, entonces no se importa la librería Vuex.
+
+### Formas de crear *stores*
+
+Existen dos maneras de usar los *stores* en Nuxt:
+
+#### 1. Clásico
+
+Para activar el store con el modo clásico, simplemente tenemos que crear el archivo `store/index.js` el cual debe exportar un método que devuelve una instancia de Vuex.
+
+#### 2. Módulos
+
+Nuxt nos permite tener un conjunto de *stores* correspondiendo cada uno de los ficheros dentro de la carpeta `store` a un módulo. Si usamos esta opción, tendremos que exportar los estados como una función y las mutaciones y acciones como objetos, en vez de como una instancia Vuex tal y como se hace en el modo clásico
+
+### La acción *nuxtServerInit*
+
+Si la acción *nuxtServerInit* está definida en el store, Nuxt.js llamará a este método desde el contexto del servidor. Es muy útil cuando tenemos datos en el servidor que queremos mandar directamente al lado del cliente.
+
 ## <a id="guide-plugin"></a>Plugins
+
+Nuxt.js nos permite definir plugins de Javascript para ser lanzados antes de antes de la instanciación de la aplicación Vue.js. Esto nos sirve de ayuda cuando usamos nuestras librerías o módulos externos.
+
+> Es muy ‼️importante saber que en el ciclo de vida de una instancia de Vue, sólo los eventos ***beforeCreate*** y ***created*** pueden ser ejecutados tanto en el lado servidor como en el lado cliente, el resto de eventos sólo se llamarán desde el lado de cliente.
+
+### Paquetes externos
+
+Es muy frecuente que nos encontremos en la situación de querer usar un módulo en diferentes componentes de la aplicación.
+
+Hay un **inconveniente** con esto y es que si volvemos a importar ese módulo en otro componente, se volverá a incluir el bundle completo de ese módulo. Si sólo queremos una instanciación de ese módulo por aplicación entonces debemos de incluir ese módulo en el apartado `build.vendor` dentro de nuestro fichero `nuxt.config.js`
+
+### Vue Plugins
+
+Si queremos usar plugins en nuestra aplicación, necesitamos configurar el plugin antes de lanzar la aplicación.
+
+Esto se puede hacer siguiendo los siguientes pasos:
+
+#### 1. Crear un archivo dentro de la carpeta `plugins`
+
+```javascript
+import Vue from 'vue'
+import VueNotifications from 'vue-notifications'
+
+Vue.use(VueNotifications)
+```
+
+#### 2. Añadimos el paquete dentro de la clave `plugins` del archivo `nuxt.config.js`
+
+```javascript
+module.exports = {
+  plugins: ['~/plugins/vue-notifications']
+}
+```
+
+> Podemos querer que ese módulo se encuentre dentro del bundle de la app, porque se trate de una librería que vamos a usar en toda la aplicación, para ello lo incluimos dentro del *vendor* de *bundle* para un mejor **cacheo de la librería**.
+
+### Inyección en $root & context
+
+Algunos plugins necesitan ser inyectados en el root de la aplicación para ser usados. Con Nuxt.js, podemos usar la `app` disponible dentro del contexto cuando exportemos el método.
+
+#### 1. Crear un archivo dentro de la carpeta `plugins`
+
+```javascript
+import Vue from 'vue'
+import VueI18n from 'vue-i18n'
+
+Vue.use(VueI18n)
+
+export default ({ app }, inject) => {
+  // Set `i18n` instance on `app`
+  // This way we can use it in middleware and pages `asyncData`/`fetch`
+  app.i18n = new VueI18n({
+    /* `VueI18n` options... */
+  })
+}
+```
+
+#### 2. Añadimos el paquete dentro de la clave `plugins` del archivo `nuxt.config.js`
+
+```javascript
+module.exports = {
+  build: {
+    vendor: ['vue-i18n']
+  },
+  plugins: ['~/plugins/i18n.js']
+}
+```
+
+> Podemos querer que ese módulo se encuentre dentro del bundle de la app, porque se trate de una librería que vamos a usar en toda la aplicación, para ello lo incluimos dentro del *vendor* de *bundle* para un mejor **cacheo de la librería**.
+
+### Sólo lado de cliente
+
+Algunos plugins podrían funcionar sólo del lado servidor, bien por que accedan a la variable `window`, porque necesiten `localStorage` o almacenamiento en `cookies`, etc.
+
+Si es el caso podemos configurar el plugin para que sólo funcione en el lado de cliente, esto se hace insertando una propiedad `ssr: false`dentro del archivo `config.nuxt.js`.
+
+```javascript
+module.exports = {
+  plugins: [
+    { src: '~/plugins/vue-notifications', ssr: false }
+  ]
+}
+```
+
 ## <a id="guide-assets"></a>Assets
+
+Por defecto, Nuxt usa los loaders `vue-loader`, `file-loader` y `url-loader` de *webpack* para el servicio de assets. Pero también podemos servir estáticos desde la carpeta `static`.
+
+Estos dos servicios para servir estáticos son:
+
+### 1. *Webpacked*
+Los recursos son administrados por *webpack*.
+
+### 2. *Static*
+Subidos directamente a la carpeta `static` y servidos directamente desde ahí, sin la intervención de *webpack*
+
 ## <a id="guide-despliegue"></a>Despliegue
+
+### Lista de comandos
+
+COMANDO | DESCRIPCIÓN
+--------  | -----------
+nuxt | Lanza un servidor de desarrollo en *localhost:3000* con *hot-reloading*
+nuxt build | Crear la aplicación con wepack y minifica el JS & CSS (para producción)
+nuxt start | Arranca el servidor en modo producción (después de haber ejecutado *nuxt build*)
+nuxt generate | Genera la aplicación y genera cada ruta como un archivo HTML (usado para la generación de estáticos)
+
+### Despliegue en producción
+
+Nuxt.js nos permite elegir entre tres modos de desplegar nuestra aplicación:
+
+#### 1. Server rendered deployment (Universal)
+
+Para desplegar, en lugar de ejecutar `nuxt`, probablemente queramos construir antes de tiempo. Por lo tanto construir y ejecutar son dos comandos separados.
+
+```bash
+nuxt build
+nuxt start
+```
+
+#### 2. SPA
+
+Para desplegar en modo SPA, debemos hacer lo siguiente:
+	1. Cambiar el atributo `mode` en el archivo `nuxt.config.js` a `spa`.
+2. Lanzar `npm run build`
+3. Desplegar la carpeta `dist/` en el servidor web correspondiente.
+
+#### 3. Generación de estáticos
+
+Nuxt.js nos da la habilidad de servir nuestra aplicación web desde cualquier *hosting* estático.
+
+Para generar nuestra aplicación web en archivos estáticos:
+
+```bash
+npm run generate
+```
+
+Con esto crearemos la carpeta `dist` que tendrá todo listo para ser desplegado en nuestro servidor estático.
+
+
 # <a id="ejemplo"></a>Ejemplo
 # <a id="ejemplo-aws"></a>Ejemplo AWS Serverless
