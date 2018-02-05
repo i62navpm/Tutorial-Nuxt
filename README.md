@@ -29,7 +29,8 @@
 # <a id="isomorfica"></a>¿Qué es el SSR o aplicaciones universales?
 Cualquier framework de JavaScript (*Vue, React, Angular, …*), generan componentes que por defecto producen y manipulan DOM en el navegador como salida. El ***Server Side Rendering*** o SSR, nos ofrece la posibilidad de convertir los mismos componentes en cadenas de HTML en el servidor, enviarlos directamente al navegador y generar una aplicación en el navegador del cliente.
 
-Una aplicación JavaScript **isomórficas** o  **universal**, es aquella en la que su código puede ser interpretado, tanto en la parte de cliente (navegador) como en la parte de servidor (ex. [NodeJS](https://nodejs.org)).
+Una aplicación JavaScript **isomórficas** o  **universal**, es aquella en la que su código puede ser interpretado, tanto en la parte de cliente (navegador) como en la parte de servidor (ex. [NodeJS](https://nodejs.org)).
+> Según [Kyle Simpson](https://github.com/getify/You-Dont-Know-JS), JavaScript no es exactamente un lenguaje "dínamico" o "interpretado", sino que se trata de un lenguage compilado. Éste no se compila con mucha antelación, ni los resultados de la compilación son portables entre varios sistemas distribuidos. [Más info](https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch1.md#compiler-theory)
 
 En el caso de Nuxt, su principal ventaja es el renderizado UI (*interfaces de usuario*) abstrayendo al usuario la complejidad de saber si su código se está compilando en cliente o en servidor.
 
