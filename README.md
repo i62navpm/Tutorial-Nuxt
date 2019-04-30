@@ -367,9 +367,9 @@ La layout o plantilla es un esquema de la distribución de los elementos dentro 
 
 3. **Nuevos *layouts***
 
-	Podemos incluir nuevas plantilas de elementos. Cada archivo añadido en el directorio de *layouts* creará un *layout* personalizado y accesible con la propiedad *layout* al resto de páginas.
+	Podemos incluir nuevas plantillas de elementos. Cada archivo añadido en el directorio de *layouts* creará un *layout* personalizado y accesible con la propiedad *layout* al resto de páginas.
 
-	Al igual que en el layout por defecto, no debemos olvidar el `<nuxt />` para mostrar las diferentes pginas que tengan asociado este nuevo layout.
+	Al igual que en el layout por defecto, no debemos olvidar el `<nuxt />` para mostrar las diferentes páginas que tengan asociado este nuevo layout.
 
 ### Page
 
